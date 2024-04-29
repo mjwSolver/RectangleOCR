@@ -9,115 +9,77 @@ import Vision
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     private let label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "Default Text"
+        label.text = "Start calculating the area of your rectangle!"
         return label
+    }()
+    
+    private let button: UIButton = {
+        let button = UIButton()
+        return button
     }()
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-//        imageView.image = UIImage(named: "example1")
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "photographer-bg")
+        imageView.contentMode = .scaleAspectFill
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return imageView
     }()
+    
+    
+    // MARK: ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .systemRed
         view.addSubview(label)
         view.addSubview(imageView)
-        tapGesture()
+        view.addSubview(button)
+        
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        imageView.frame = CGRect(x: 20, 
-                                 y: view.safeAreaInsets.top,
-                                 width: view.frame.size.width-40,
-                                 height: view.frame.size.width-40)
         
         label.frame = CGRect(x: 20,
                              y: view.frame.size.width + view.safeAreaInsets.top,
                              width: view.frame.size.width-40,
                              height: 200)
         
+        
+        
+        self.button.addTarget(self, action: #selector(goToRecognizeTextView), for:.touchUpInside)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            button.widthAnchor.constraint(equalToConstant: 200), 
+            button.heightAnchor.constraint(equalToConstant: 44),
+        ])
+        
     }
-    
-    private func setupUI() {
-        self.view.backgroundColor = .systemGreen
-//        self.view.addSubview(button)
-//        self.button.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-//            button.widthAnchor.constraint(equalToConstant: 200), button.heightAnchor.constraint(equalToConstant: 44),
-//        ])
-    }
-
-    
     
     // MARK: - Add TapGasture In ImageView
-    func tapGesture() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector (imageTapped))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tap)
+    @objc func goToRecognizeTextView() {
+        let vc = RecognizeTextViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
+        
     @objc func imageTapped() {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
-    }
-    
-    
-    // function to extract the numbers from the acquired text
-    
-    private func recognizeTextFromImage(image: UIImage?){
-        
-        guard let cgImage = image?.cgImage else {
-            fatalError("Failed to Convert to CGImage")
-        }
-        
-        // Handler
-        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-        
-        // Request
-        let request = VNRecognizeTextRequest { [weak self] request, error in
-            guard let observations = request.results as? [VNRecognizedTextObservation],
-                  error == nil else {
-                return
-            }
-            
-            
-            let text = observations.compactMap({
-                $0.topCandidates(1).first?.string
-            }).joined(separator: ", ")
-            
-            
-            DispatchQueue.main.async {
-                self?.label.text = text
-            }
-            
-        }
-        
-        
-        // MARK: Process Requests
-        do {
-            try handler.perform([request])
-        }
-        catch {
-            label.text = "\(error)"
-        }
-        
     }
     
 
