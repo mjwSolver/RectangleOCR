@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.addSubview(label)
         view.addSubview(imageView)
-//        tapGesture()
+        tapGesture()
     }
 
     override func viewDidLayoutSubviews() {
@@ -49,11 +49,11 @@ class ViewController: UIViewController {
     
     
     // MARK: - Add TapGasture In ImageView
-//    func tapGesture() {
-//        let tap = UITapGestureRecognizer(target: self, action: #selector (imageTapped))
-//        imageView.isUserInteractionEnabled = true
-//        imageView.addGestureRecognizer(tap)
-//    }
+    func tapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector (imageTapped))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tap)
+    }
     
     
     @objc func imageTapped() {
