@@ -14,6 +14,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.text = "Default Text"
         return label
     }()
     
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = .systemRed
         view.addSubview(label)
         view.addSubview(imageView)
         tapGesture()
@@ -46,6 +48,19 @@ class ViewController: UIViewController {
                              height: 200)
         
     }
+    
+    private func setupUI() {
+        self.view.backgroundColor = .systemGreen
+//        self.view.addSubview(button)
+//        self.button.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        NSLayoutConstraint.activate([
+//            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+//            button.widthAnchor.constraint(equalToConstant: 200), button.heightAnchor.constraint(equalToConstant: 44),
+//        ])
+    }
+
     
     
     // MARK: - Add TapGasture In ImageView

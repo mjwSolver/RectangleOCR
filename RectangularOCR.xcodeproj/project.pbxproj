@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83BC9CD62BDF4E61007D59B6 /* RecognizeTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BC9CD52BDF4E61007D59B6 /* RecognizeTextViewController.swift */; };
 		83EC506E2BD75569009863A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC506D2BD75569009863A7 /* AppDelegate.swift */; };
 		83EC50702BD75569009863A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC506F2BD75569009863A7 /* SceneDelegate.swift */; };
 		83EC50722BD75569009863A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC50712BD75569009863A7 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		83BC9CD52BDF4E61007D59B6 /* RecognizeTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeTextViewController.swift; sourceTree = "<group>"; };
 		83EC506A2BD75569009863A7 /* RectangularOCR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RectangularOCR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83EC506D2BD75569009863A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83EC506F2BD75569009863A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				83EC50762BD7556A009863A7 /* Assets.xcassets */,
 				83EC50782BD7556A009863A7 /* LaunchScreen.storyboard */,
 				83EC507B2BD7556A009863A7 /* Info.plist */,
+				83BC9CD52BDF4E61007D59B6 /* RecognizeTextViewController.swift */,
 			);
 			path = RectangularOCR;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				83EC50722BD75569009863A7 /* ViewController.swift in Sources */,
 				83EC506E2BD75569009863A7 /* AppDelegate.swift in Sources */,
+				83BC9CD62BDF4E61007D59B6 /* RecognizeTextViewController.swift in Sources */,
 				83EC50702BD75569009863A7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
