@@ -11,8 +11,9 @@ class ViewController: UIViewController {
     
     private let label: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
         label.textAlignment = .center
+        label.font.withSize(10)
+        label.textColor = .white
         label.text = "Start calculating the area of your rectangle!"
         return label
     }()
@@ -20,25 +21,30 @@ class ViewController: UIViewController {
     private let importImageButton: UIButton = {
         let button = UIButton()
         
-        button.setTitle("Import an Image", for: .normal)
-        button.backgroundColor = .blue
+        var config = UIButton.Configuration.filled()
+        config.buttonSize = .large
+        config.cornerStyle = .medium
         
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .medium, scale: .default)
-        let shareImage = UIImage(systemName: "square.and.arrow.up.on.square", withConfiguration: imageConfig)
+        config.baseBackgroundColor = .systemBlue
+        config.baseForegroundColor = .white
         
-        button.setImage(shareImage, for: .normal)
+        config.imagePadding = 5
+        config.image = UIImage(systemName: "square.and.arrow.up.on.square")
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 14, 
+                                                                                  weight: .medium,
+                                                                                  scale: .default)
+        
+        config.attributedTitle = "Import an Image"
+        
+        button.configuration = config
         
         return button
     }()
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "photographer-bg")
-        imageView.contentMode = .scaleAspectFill
-        imageView.frame = CGRect(x: 0, y: 0, 
-                                 width: UIScreen.main.bounds.width,
-                                 height: UIScreen.main.bounds.height)
-        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        imageView.image = UIImage(named: "photographer-bg-3x")
+        
         return imageView
     }()
     
@@ -48,8 +54,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.addSubview(label)
         view.addSubview(imageView)
+        view.addSubview(label)
         view.addSubview(importImageButton)
         
     }
@@ -57,22 +63,44 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.frame = CGRect(x: 0, y: 0,
+                                 width: UIScreen.main.bounds.width,
+                                 height: UIScreen.main.bounds.height)
+        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        
         label.frame = CGRect(x: 20,
                              y: view.frame.size.width + view.safeAreaInsets.top,
                              width: view.frame.size.width-40,
-                             height: 200)
+                             height: 300)
         
-        // MARK: Go to recognize textview
-        self.importImageButton.addTarget(self, action: #selector(goToRecognizeTextView), for:.touchUpInside)
         
-        importImageButton.translatesAutoresizingMaskIntoConstraints = false
+        // MARK: Go to recognize textview after pressing the image button
+        self.importImageButton.addTarget(self, action: #selector(imageTapped), for:.touchUpInside)
         
-        NSLayoutConstraint.activate([
-            importImageButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            importImageButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            importImageButton.widthAnchor.constraint(equalToConstant: 200), 
-            importImageButton.heightAnchor.constraint(equalToConstant: 44),
-        ])
+        importImageButton.frame = CGRect(x: 20,
+                                        y: view.frame.size.width + view.safeAreaInsets.top,
+                                        width: 190,
+                                        height: 55)
+        
+//        importImageButton.translatesAutoresizingMaskIntoConstraints = false
+        
+//        NSLayoutConstraint.activate([
+//            importImageButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            importImageButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+//            importImageButton.widthAnchor.constraint(equalToConstant: 200), 
+//            importImageButton.heightAnchor.constraint(equalToConstant: 44),
+//        ])
+        
+    }
+    
+    
+    @objc func tapImageThenGoToRecognizeTextView() {
+        
+        imageTapped()
+        goToRecognizeTextView()
         
     }
     
@@ -81,7 +109,6 @@ class ViewController: UIViewController {
         let vc = RecognizeTextViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
         
     @objc func imageTapped() {
         let imagePicker = UIImagePickerController()
@@ -99,9 +126,13 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
                                info: [UIImagePickerController.InfoKey : Any]) {
         
         imageView.image = info[.originalImage] as? UIImage
+        var gmbr = imageView.image
         dismiss(animated: true, completion: nil)
     }
     
 }
 
+#Preview {
+    ViewController()
+}
 
