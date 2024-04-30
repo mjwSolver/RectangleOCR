@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "photographer-bg.png",
+      "filename" : "photographer-bg-new.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "photographer-bg-2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "photographer-bg-3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
