@@ -10,11 +10,59 @@ import UIKit
 
 class RecognizeTextViewController: UIViewController {
 
+    private let selectedImage: UIImageView = {
+        let image = UIImageView()
+        
+        return image
+    }()
+    
+    private let extractedDimensionsTitleLabel: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    private let extractedDimensionsLabel: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    private let calculatedAreaTitleLabel: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    private let calculatedAreaLabel: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    
+    // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = .systemBackground
+        setUpUI()
+        
         
     }
+
+    
+    private func setUpUI(){
+        self.view.addSubview(selectedImage)
+        
+        self.view.addSubview(extractedDimensionsTitleLabel)
+        self.view.addSubview(extractedDimensionsLabel)
+        
+        self.view.addSubview(calculatedAreaTitleLabel)
+        self.view.addSubview(calculatedAreaLabel)
+    }
+    
+    // MARK: RecognizeTextFromImage
     
     private func recognizeTextFromImage(image: UIImage?){
         
