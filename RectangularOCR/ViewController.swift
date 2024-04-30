@@ -5,7 +5,6 @@
 //  Created by Marcell JW on 23/04/24.
 //
 
-import Vision
 import UIKit
 
 class ViewController: UIViewController {
@@ -18,8 +17,17 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private let button: UIButton = {
+    private let importImageButton: UIButton = {
         let button = UIButton()
+        
+        button.setTitle("Import an Image", for: .normal)
+        button.backgroundColor = .blue
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .medium, scale: .default)
+        let shareImage = UIImage(systemName: "square.and.arrow.up.on.square", withConfiguration: imageConfig)
+        
+        button.setImage(shareImage, for: .normal)
+        
         return button
     }()
     
@@ -27,7 +35,9 @@ class ViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "photographer-bg")
         imageView.contentMode = .scaleAspectFill
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        imageView.frame = CGRect(x: 0, y: 0, 
+                                 width: UIScreen.main.bounds.width,
+                                 height: UIScreen.main.bounds.height)
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return imageView
     }()
@@ -40,7 +50,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.addSubview(label)
         view.addSubview(imageView)
-        view.addSubview(button)
+        view.addSubview(importImageButton)
         
     }
     
@@ -52,17 +62,16 @@ class ViewController: UIViewController {
                              width: view.frame.size.width-40,
                              height: 200)
         
+        // MARK: Go to recognize textview
+        self.importImageButton.addTarget(self, action: #selector(goToRecognizeTextView), for:.touchUpInside)
         
-        
-        self.button.addTarget(self, action: #selector(goToRecognizeTextView), for:.touchUpInside)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
+        importImageButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            button.widthAnchor.constraint(equalToConstant: 200), 
-            button.heightAnchor.constraint(equalToConstant: 44),
+            importImageButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            importImageButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            importImageButton.widthAnchor.constraint(equalToConstant: 200), 
+            importImageButton.heightAnchor.constraint(equalToConstant: 44),
         ])
         
     }
@@ -72,7 +81,6 @@ class ViewController: UIViewController {
         let vc = RecognizeTextViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
     
         
     @objc func imageTapped() {

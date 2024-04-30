@@ -12,31 +12,34 @@ class RecognizeTextViewController: UIViewController {
 
     private let selectedImage: UIImageView = {
         let image = UIImageView()
-        
+        image.image = UIImage(named: "photographer-bg")
         return image
     }()
     
     private let extractedDimensionsTitleLabel: UILabel = {
         let label = UILabel()
-        
+        label.font.withSize(23)
+        label.text = "? X ?"
         return label
     }()
     
     private let extractedDimensionsLabel: UILabel = {
         let label = UILabel()
-        
+        label.font.withSize(23)
+        label.text = "? X ?"
         return label
     }()
     
     private let calculatedAreaTitleLabel: UILabel = {
         let label = UILabel()
-        
+        label.text = "Calculated Area"
         return label
     }()
     
     private let calculatedAreaLabel: UILabel = {
         let label = UILabel()
         
+        label.text = "? meter"
         return label
     }()
     
@@ -45,21 +48,46 @@ class RecognizeTextViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .white
         setUpUI()
         
         
     }
-
     
     private func setUpUI(){
+        
         self.view.addSubview(selectedImage)
+        selectedImage.frame = CGRect(x: 20,
+                             y: view.frame.size.width + view.safeAreaInsets.top,
+                             width: view.frame.size.width-40,
+                             height: 200)
         
         self.view.addSubview(extractedDimensionsTitleLabel)
+        extractedDimensionsTitleLabel.frame = CGRect(x: 20,
+                             y: view.frame.size.width + view.safeAreaInsets.top,
+                             width: view.frame.size.width-40,
+                             height: 200)
+        
         self.view.addSubview(extractedDimensionsLabel)
+        extractedDimensionsLabel.frame = CGRect(x: 20,
+                             y: view.frame.size.width + view.safeAreaInsets.top,
+                             width: view.frame.size.width-40,
+                             height: 200)
         
         self.view.addSubview(calculatedAreaTitleLabel)
+        calculatedAreaTitleLabel.frame = CGRect(x: 20,
+                             y: view.frame.size.width + view.safeAreaInsets.top,
+                             width: view.frame.size.width-40,
+                             height: 200)
+        
         self.view.addSubview(calculatedAreaLabel)
+        calculatedAreaLabel.frame = CGRect(x: 20,
+                             y: view.frame.size.width + view.safeAreaInsets.top,
+                             width: view.frame.size.width-40,
+                             height: 200)
+
+        
+        
     }
     
     // MARK: RecognizeTextFromImage
@@ -106,4 +134,8 @@ class RecognizeTextViewController: UIViewController {
     }
     
 
+}
+
+#Preview {
+    RecognizeTextViewController()
 }
