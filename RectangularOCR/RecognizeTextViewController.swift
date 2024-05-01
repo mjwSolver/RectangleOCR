@@ -76,7 +76,7 @@ class RecognizeTextViewController: UIViewController {
         selectedImageView.image = selectedImageIsValid ? selectedImage : UIImage(named: "photographer-bg")
         
         if(selectedImageIsValid) {
-            recognizeTextFromImage(image: selectedImage)
+            try? recognizeTextFromImage(image: selectedImage)
         }
         
         self.view.addSubview(selectedImageView)
@@ -112,10 +112,11 @@ class RecognizeTextViewController: UIViewController {
                                              width: standardWidth,
                                              height: 50)
         
-        
     }
     
     // MARK: RecognizeTextFromImage
+    /// Recognizes the Text from the Image.
+    /// If the texts is far apart, it will be merged together
     
     private func recognizeTextFromImage(image: UIImage?){
         
@@ -133,19 +134,18 @@ class RecognizeTextViewController: UIViewController {
                 return
             }
             
-            
             let text = observations.compactMap({
                 $0.topCandidates(1).first?.string
-            }).joined(separator: ", ")
+            }).joined(separator: "; ")
             
+            let ArrayOfTexts = text.components(separatedBy: "; ")
             
             DispatchQueue.main.async {
                 // MARK: Associate a Label for Recognizing the Text
-//                self?.label.text = text
+                self?.extractedDimensionsLabel.text = text
             }
             
         }
-        
         
         // MARK: Process Requests
         do {
@@ -153,7 +153,7 @@ class RecognizeTextViewController: UIViewController {
         }
         catch {
             // MARK: Associate a Label for Recognizing the Text
-//            label.text = "\(error)"
+            extractedDimensionsLabel.text = "\(error)"
         }
         
     }
