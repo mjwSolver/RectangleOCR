@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         config.buttonSize = .large
         config.cornerStyle = .medium
         
-        config.baseBackgroundColor = .systemBlue
+        config.baseBackgroundColor = .purple
         config.baseForegroundColor = .white
         
         config.imagePadding = 4
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
                              height: 350)
         
         // MARK: Go to recognize textview after pressing the image button
-        importImageButton.addTarget(self, action: #selector(imageTapped), for:.touchUpInside)
+        self.importImageButton.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
         
         importImageButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -95,7 +95,6 @@ class ViewController: UIViewController {
         ])
         
         
-        
         backgroundImageView.frame = CGRect(x: 0, y: 0,
                                  width: UIScreen.main.bounds.width,
                                  height: UIScreen.main.bounds.height)
@@ -105,7 +104,9 @@ class ViewController: UIViewController {
     // MARK: - Add TapGasture In ImageView
     @objc func goToRecognizeTextView() {
         let vc = RecognizeTextViewController()
+        vc.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(vc, animated: true)
+//        present(vc, animated: true)
     }
         
     @objc func imageTapped() {
@@ -126,11 +127,13 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         let theSelectedImage = info[.originalImage] as? UIImage
         backgroundImageView.image = theSelectedImage
         
+        dismiss(animated: true, completion: nil)
+        
         let vc = RecognizeTextViewController()
         vc.selectedImage = theSelectedImage
-        navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
         
-        dismiss(animated: true, completion: nil)
     }
     
 }
