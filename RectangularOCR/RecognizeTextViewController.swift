@@ -9,17 +9,20 @@ import Vision
 import UIKit
 
 class RecognizeTextViewController: UIViewController {
-
-    private let selectedImage: UIImageView = {
+    
+    var selectedImage: UIImage?
+    
+    private let selectedImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "photographer-bg")
+        
         return image
     }()
     
     private let extractedDimensionsTitleLabel: UILabel = {
         let label = UILabel()
-        label.font.withSize(23)
-        label.text = "? X ?"
+        label.font.withSize(15)
+        label.text = "Extracted Dimensions"
         return label
     }()
     
@@ -32,13 +35,14 @@ class RecognizeTextViewController: UIViewController {
     
     private let calculatedAreaTitleLabel: UILabel = {
         let label = UILabel()
+        label.font.withSize(15)
         label.text = "Calculated Area"
         return label
     }()
     
     private let calculatedAreaLabel: UILabel = {
         let label = UILabel()
-        
+        label.font.withSize(23)
         label.text = "? meter"
         return label
     }()
@@ -56,8 +60,8 @@ class RecognizeTextViewController: UIViewController {
     
     private func setUpUI(){
         
-        self.view.addSubview(selectedImage)
-        selectedImage.frame = CGRect(x: 20,
+        self.view.addSubview(selectedImageView)
+        selectedImageView.frame = CGRect(x: 20,
                              y: view.frame.size.width + view.safeAreaInsets.top,
                              width: view.frame.size.width-40,
                              height: 200)
