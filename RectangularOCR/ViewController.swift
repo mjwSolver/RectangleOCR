@@ -13,7 +13,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.font.withSize(20)
+        label.font.withSize(24)
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.textColor = .white
         label.text = "Start calculating the area of your rectangle!"
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         label.frame = CGRect(x: 30,
                              y: view.frame.size.width + view.safeAreaInsets.top,
                              width: view.frame.size.width-60,
-                             height: 300)
+                             height: 350)
         
         // MARK: Go to recognize textview after pressing the image button
         importImageButton.addTarget(self, action: #selector(imageTapped), for:.touchUpInside)
