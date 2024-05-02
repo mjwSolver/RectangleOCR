@@ -76,7 +76,7 @@ class RecognizeTextViewController: UIViewController {
         selectedImageView.image = selectedImageIsValid ? selectedImage : UIImage(named: "photographer-bg")
         
         if(selectedImageIsValid) {
-            try? recognizeTextFromImage(image: selectedImage)
+            recognizeTextFromImage(image: selectedImage)
         }
         
         self.view.addSubview(selectedImageView)
@@ -91,8 +91,8 @@ class RecognizeTextViewController: UIViewController {
                                                      width: standardWidth,
                                                      height: 50)
         
-        extractedDimensionsTitleLabel.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
-        extractedDimensionsTitleLabel.layer.borderWidth = 2
+//        extractedDimensionsTitleLabel.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
+//        extractedDimensionsTitleLabel.layer.borderWidth = 2
         
         self.view.addSubview(extractedDimensionsLabel)
         extractedDimensionsLabel.frame = CGRect(x: 20,
@@ -106,11 +106,16 @@ class RecognizeTextViewController: UIViewController {
                                              width: standardWidth,
                                              height: 50)
         
+//        calculatedAreaTitleLabel.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
+//        calculatedAreaTitleLabel.layer.borderWidth = 2
+        
         self.view.addSubview(calculatedAreaLabel)
         calculatedAreaLabel.frame = CGRect(x: 20,
                                              y: 528,
                                              width: standardWidth,
                                              height: 50)
+        
+        
         
     }
     
