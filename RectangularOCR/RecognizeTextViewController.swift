@@ -43,7 +43,8 @@ class RecognizeTextViewController: UIViewController {
     private let calculatedAreaTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font.withSize(15)
+//        label.font.withSize(15)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.text = "Calculated Area"
         return label
     }()
@@ -51,7 +52,8 @@ class RecognizeTextViewController: UIViewController {
     private let calculatedAreaLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font.withSize(23)
+//        label.font.withSize(23)
+        label.font = UIFont.systemFont(ofSize: 23, weight: .semibold)
         label.text = "? meter"
         return label
     }()
@@ -61,9 +63,12 @@ class RecognizeTextViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // The NavigationBar at the top won't work unless
+        // Unless you've rendered from the ROOT view controller
+        self.navigationItem.title = "Calculated Area"
         self.view.backgroundColor = .white
         setUpUI()
-        
         
     }
     
