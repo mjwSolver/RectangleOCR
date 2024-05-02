@@ -92,6 +92,7 @@ class ViewController: UIViewController {
             importImageButton.widthAnchor.constraint(equalToConstant: 190),
             // Set height
             importImageButton.heightAnchor.constraint(equalToConstant: 50),
+            
         ])
         
         
@@ -129,10 +130,15 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         
         dismiss(animated: true, completion: nil)
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        
         let vc = RecognizeTextViewController()
         vc.selectedImage = theSelectedImage
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        // Works as intended when fully running, not in preview
+        self.navigationController?.pushViewController(vc, animated: true)
+//        // This lets you somewhat preview it later
+//        present(vc, animated: true)
         
     }
     
@@ -141,4 +147,3 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 #Preview {
     ViewController()
 }
-
