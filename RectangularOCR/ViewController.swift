@@ -73,15 +73,11 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        label.frame = CGRect(x: 30,
-                             y: view.frame.size.width + view.safeAreaInsets.top,
-                             width: view.frame.size.width-60,
-                             height: 350)
-        
         // MARK: Go to recognize textview after pressing the image button
         self.importImageButton.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
         
         importImageButton.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             // Center horizontally
@@ -92,6 +88,13 @@ class ViewController: UIViewController {
             importImageButton.widthAnchor.constraint(equalToConstant: 190),
             // Set height
             importImageButton.heightAnchor.constraint(equalToConstant: 50),
+//            importImageButton.heightAnchor.constraint(equalToConstant: 60),
+            
+            label.bottomAnchor.constraint(equalTo: importImageButton.topAnchor, constant: -16),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            label.widthAnchor.constraint(equalToConstant: view.frame.size.width-60),
+//            label.heightAnchor.constraint(equalToConstant: 70)
             
         ])
         
