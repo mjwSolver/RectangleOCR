@@ -25,7 +25,7 @@ class RecognizeTextViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
 //        label.font.withSize(15)
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .thin)
         label.text = "Extracted Dimensions"
         return label
     }()
@@ -44,7 +44,7 @@ class RecognizeTextViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
 //        label.font.withSize(15)
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .thin)
         label.text = "Calculated Area"
         return label
     }()
@@ -72,6 +72,7 @@ class RecognizeTextViewController: UIViewController {
         
     }
     
+    /// <#Description#>
     private func setUpUI(){
         
         let leftMargin = 20.0
@@ -93,7 +94,7 @@ class RecognizeTextViewController: UIViewController {
         self.view.addSubview(extractedDimensionsTitleLabel)
         extractedDimensionsTitleLabel.frame = CGRect(x: 20,
                                                      y: 400,
-                                                     width: standardWidth,
+                                                     width: 175,
                                                      height: 50)
         
 //        extractedDimensionsTitleLabel.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
@@ -102,13 +103,13 @@ class RecognizeTextViewController: UIViewController {
         self.view.addSubview(extractedDimensionsLabel)
         extractedDimensionsLabel.frame = CGRect(x: 20,
                                                  y: 428,
-                                                 width: standardWidth,
+                                                 width: 60,
                                                  height: 50)
         
         self.view.addSubview(calculatedAreaTitleLabel)
         calculatedAreaTitleLabel.frame = CGRect(x: 20,
-                                             y: 500,
-                                             width: standardWidth,
+                                             y: 478,
+                                             width: 125,
                                              height: 50)
         
 //        calculatedAreaTitleLabel.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
@@ -116,11 +117,18 @@ class RecognizeTextViewController: UIViewController {
         
         self.view.addSubview(calculatedAreaLabel)
         calculatedAreaLabel.frame = CGRect(x: 20,
-                                             y: 528,
-                                             width: standardWidth,
+                                             y: 508,
+                                             width: 90,
                                              height: 50)
         
-        
+//        extractedDimensionsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        extractedDimensionsLabel.translatesAutoresizingMaskIntoConstraints = false
+//        calculatedAreaTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        calculatedAreaLabel.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        NSLayoutConstraint.activate([
+//            extractedDimensionsLabel.topAnchor.constraint(equalTo: selectedImageView.bottomAnchor, constant: -20)
+//        ])
         
     }
     
@@ -186,6 +194,11 @@ class RecognizeTextViewController: UIViewController {
         
     }
 
+    /// What if:
+    /// - two different unit of measurements?
+    ///     - convert meter to centimeter > Multiply by 100
+    /// - handling comma values
+    ///     - as text we convert it into commas
     private func generateCalculatedArea(firstMeasurement: String, secondMeasurement: String) -> String {
         
         var firstValue = "X"
@@ -207,7 +220,6 @@ class RecognizeTextViewController: UIViewController {
         let convertedFirst = Int(firstValue) ?? 1
         let convertedSecond = Int(secondValue) ?? 1
         let calculatedArea = convertedFirst * convertedSecond
-        
         
         let firstAndSecondValueAreValid = firstValue != "X" && secondValue != "X"
         let calculatedAreaWithMeasurementUnit = firstAndSecondValueAreValid ? String(calculatedArea) + firstUnit : "? x ?"
