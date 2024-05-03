@@ -17,11 +17,16 @@ class ViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.textColor = .white
         label.text = "Start calculating the area of your rectangle!"
+        
+//        label.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
+//        label.layer.borderWidth = 2
         return label
     }()
     
     private let importImageButton: UIButton = {
         let button = UIButton()
+        
+        let contentInsetConstant = 20.0
         
         var config = UIButton.Configuration.filled()
         config.buttonSize = .large
@@ -31,6 +36,12 @@ class ViewController: UIViewController {
         config.baseForegroundColor = .white
         
         config.imagePadding = 4
+        config.contentInsets = NSDirectionalEdgeInsets(
+            top: contentInsetConstant,
+            leading: contentInsetConstant,
+            bottom: contentInsetConstant + 0,
+            trailing: contentInsetConstant
+        )
         config.image = UIImage(systemName: "square.and.arrow.up.on.square")
         config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 14, 
                                                                                   weight: .medium,
@@ -83,11 +94,10 @@ class ViewController: UIViewController {
             // Center horizontally
             importImageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             // Set distance from bottom
-            importImageButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            importImageButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -84),
             // Set width
             importImageButton.widthAnchor.constraint(equalToConstant: 190),
             // Set height
-            importImageButton.heightAnchor.constraint(equalToConstant: 50),
 //            importImageButton.heightAnchor.constraint(equalToConstant: 60),
             
             label.bottomAnchor.constraint(equalTo: importImageButton.topAnchor, constant: -16),
