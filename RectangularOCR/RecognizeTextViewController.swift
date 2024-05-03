@@ -135,9 +135,9 @@ class RecognizeTextViewController: UIViewController {
             calculatedAreaLabel.topAnchor.constraint(equalTo: calculatedAreaTitleLabel.bottomAnchor, constant: 2),
             calculatedAreaLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
             
-            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            doneButton.widthAnchor.constraint(equalToConstant: standardWidth-40)
+            doneButton.widthAnchor.constraint(equalToConstant: standardWidth-60)
         ])
         
     }
