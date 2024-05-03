@@ -86,49 +86,65 @@ class RecognizeTextViewController: UIViewController {
         }
         
         self.view.addSubview(selectedImageView)
-        selectedImageView.frame = CGRect(x: 20,
-                                         y: 100,
-                                         width: standardWidth,
-                                         height: 250)
+//        selectedImageView.frame = CGRect(x: 20,
+//                                         y: 100,
+//                                         width: standardWidth,
+//                                         height: 250)
         
         self.view.addSubview(extractedDimensionsTitleLabel)
-        extractedDimensionsTitleLabel.frame = CGRect(x: 20,
-                                                     y: 400,
-                                                     width: 175,
-                                                     height: 50)
+//        extractedDimensionsTitleLabel.frame = CGRect(x: 20,
+//                                                     y: 400,
+//                                                     width: 175,
+//                                                     height: 50)
         
-//        extractedDimensionsTitleLabel.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
-//        extractedDimensionsTitleLabel.layer.borderWidth = 2
+
         
         self.view.addSubview(extractedDimensionsLabel)
-        extractedDimensionsLabel.frame = CGRect(x: 20,
-                                                 y: 428,
-                                                 width: 60,
-                                                 height: 50)
+//        extractedDimensionsLabel.frame = CGRect(x: 20,
+//                                                 y: 428,
+//                                                 width: 60,
+//                                                 height: 50)
         
         self.view.addSubview(calculatedAreaTitleLabel)
-        calculatedAreaTitleLabel.frame = CGRect(x: 20,
-                                             y: 478,
-                                             width: 125,
-                                             height: 50)
+//        calculatedAreaTitleLabel.frame = CGRect(x: 20,
+//                                             y: 478,
+//                                             width: 125,
+//                                             height: 50)
         
 //        calculatedAreaTitleLabel.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
 //        calculatedAreaTitleLabel.layer.borderWidth = 2
         
         self.view.addSubview(calculatedAreaLabel)
-        calculatedAreaLabel.frame = CGRect(x: 20,
-                                             y: 508,
-                                             width: 90,
-                                             height: 50)
+//        calculatedAreaLabel.frame = CGRect(x: 20,
+//                                             y: 508,
+//                                             width: 90,
+//                                             height: 50)
         
-//        extractedDimensionsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        extractedDimensionsLabel.translatesAutoresizingMaskIntoConstraints = false
-//        calculatedAreaTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        calculatedAreaLabel.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            extractedDimensionsLabel.topAnchor.constraint(equalTo: selectedImageView.bottomAnchor, constant: -20)
-//        ])
+        selectedImageView.translatesAutoresizingMaskIntoConstraints = false
+        extractedDimensionsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        extractedDimensionsLabel.translatesAutoresizingMaskIntoConstraints = false
+        calculatedAreaTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        calculatedAreaLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            selectedImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            selectedImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            selectedImageView.widthAnchor.constraint(equalToConstant: standardWidth),
+            selectedImageView.heightAnchor.constraint(equalToConstant: 250),
+            
+            extractedDimensionsTitleLabel.topAnchor.constraint(equalTo: selectedImageView.bottomAnchor, constant: 50),
+            extractedDimensionsTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            
+            extractedDimensionsLabel.topAnchor.constraint(equalTo: extractedDimensionsTitleLabel.bottomAnchor, constant: 2),
+            extractedDimensionsLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            
+            calculatedAreaTitleLabel.topAnchor.constraint(equalTo: extractedDimensionsLabel.bottomAnchor, constant: 30),
+            calculatedAreaTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            
+            calculatedAreaLabel.topAnchor.constraint(equalTo: calculatedAreaTitleLabel.bottomAnchor, constant: 2),
+            calculatedAreaLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+        ])
         
     }
     
