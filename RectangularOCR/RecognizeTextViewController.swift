@@ -94,7 +94,7 @@ class RecognizeTextViewController: UIViewController {
         let standardWidth = view.frame.size.width - leftMargin*2
         
         let selectedImageIsValid = selectedImage != nil
-        selectedImageView.image = selectedImageIsValid ? selectedImage : UIImage(named: "photographer-bg")
+        selectedImageView.image = selectedImageIsValid ? selectedImage : UIImage(named: "ruler-bg")
         
         if(selectedImageIsValid) {
             recognizeTextFromImage(image: selectedImage)

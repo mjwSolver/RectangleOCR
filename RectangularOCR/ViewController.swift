@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         config.buttonSize = .large
         config.cornerStyle = .medium
         
-        config.baseBackgroundColor = .purple
+        config.baseBackgroundColor = .systemBlue
         config.baseForegroundColor = .white
         
         config.imagePadding = 4
@@ -61,7 +61,7 @@ class ViewController: UIViewController {
     
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        var backgroundImage = UIImage(named: "photographer-bg-3x")
+        var backgroundImage = UIImage(named: "ruler-bg")
         
         imageView.contentMode = .scaleAspectFill
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
