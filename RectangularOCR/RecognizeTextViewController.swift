@@ -58,6 +58,22 @@ class RecognizeTextViewController: UIViewController {
         return label
     }()
     
+    private let doneButton: UIButton = {
+        let button = UIButton()
+        
+        var config = UIButton.Configuration.filled()
+        config.attributedTitle = "Done"
+        
+        config.buttonSize = .large
+        config.cornerStyle = .medium
+        
+        config.baseBackgroundColor = .systemBlue
+        config.baseForegroundColor = .white
+        
+        button.configuration = config
+        
+        return button
+    }()
     
     // MARK: ViewDidLoad
     
@@ -72,7 +88,6 @@ class RecognizeTextViewController: UIViewController {
         
     }
     
-    /// <#Description#>
     private func setUpUI(){
         
         let leftMargin = 20.0
@@ -86,45 +101,20 @@ class RecognizeTextViewController: UIViewController {
         }
         
         self.view.addSubview(selectedImageView)
-//        selectedImageView.frame = CGRect(x: 20,
-//                                         y: 100,
-//                                         width: standardWidth,
-//                                         height: 250)
-        
         self.view.addSubview(extractedDimensionsTitleLabel)
-//        extractedDimensionsTitleLabel.frame = CGRect(x: 20,
-//                                                     y: 400,
-//                                                     width: 175,
-//                                                     height: 50)
-        
-
-        
         self.view.addSubview(extractedDimensionsLabel)
-//        extractedDimensionsLabel.frame = CGRect(x: 20,
-//                                                 y: 428,
-//                                                 width: 60,
-//                                                 height: 50)
-        
         self.view.addSubview(calculatedAreaTitleLabel)
-//        calculatedAreaTitleLabel.frame = CGRect(x: 20,
-//                                             y: 478,
-//                                             width: 125,
-//                                             height: 50)
-        
-//        calculatedAreaTitleLabel.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1.0)
-//        calculatedAreaTitleLabel.layer.borderWidth = 2
-        
         self.view.addSubview(calculatedAreaLabel)
-//        calculatedAreaLabel.frame = CGRect(x: 20,
-//                                             y: 508,
-//                                             width: 90,
-//                                             height: 50)
+        self.view.addSubview(doneButton)
+        
+        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         
         selectedImageView.translatesAutoresizingMaskIntoConstraints = false
         extractedDimensionsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         extractedDimensionsLabel.translatesAutoresizingMaskIntoConstraints = false
         calculatedAreaTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         calculatedAreaLabel.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             selectedImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
@@ -144,8 +134,16 @@ class RecognizeTextViewController: UIViewController {
             
             calculatedAreaLabel.topAnchor.constraint(equalTo: calculatedAreaTitleLabel.bottomAnchor, constant: 2),
             calculatedAreaLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            
+            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            doneButton.widthAnchor.constraint(equalToConstant: standardWidth-40)
         ])
         
+    }
+    
+    @objc func doneButtonTapped(){
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: RecognizeTextFromImage
