@@ -146,13 +146,31 @@ class RecognizeTextViewController: UIViewController {
             
             let text = observations.compactMap({
                 $0.topCandidates(1).first?.string
-            }).joined(separator: "; ")
+            }).joined(separator: " X ")
             
-            let ArrayOfTexts = text.components(separatedBy: "; ")
+            
+            
+            let separatedTexts = text.components(separatedBy: " X ")
+            
+            var firstMeasurement = "?"
+            var secondMeasurement = "?"
+
+            if separatedTexts.count >= 1 {
+                firstMeasurement = separatedTexts[0]
+            }
+            if separatedTexts.count >= 2 {
+                secondMeasurement = separatedTexts[1]
+            }
+            
+            let calculatedArea = self?.generateCalculatedArea(firstMeasurement: firstMeasurement,
+                                                              secondMeasurement: secondMeasurement
+            )
+            
             
             DispatchQueue.main.async {
                 // MARK: Associate a Label for Recognizing the Text
                 self?.extractedDimensionsLabel.text = text
+                self?.calculatedAreaLabel.text = calculatedArea
             }
             
         }
@@ -167,8 +185,37 @@ class RecognizeTextViewController: UIViewController {
         }
         
     }
-    
 
+    private func generateCalculatedArea(firstMeasurement: String, secondMeasurement: String) -> String {
+        
+        var firstValue = "X"
+        var secondValue = "X"
+        var firstUnit = " ?"
+        
+        if let firstWhitespaceIndex = firstMeasurement.firstIndex(of: " ") {
+            firstValue = String(firstMeasurement.prefix(upTo: firstWhitespaceIndex))
+            firstUnit = String(firstMeasurement.suffix(from: firstWhitespaceIndex))
+            
+            print("Substring:", firstValue)
+        }
+        
+        if let secondWhitespaceIndex = secondMeasurement.firstIndex(of: " ") {
+            secondValue = String(secondMeasurement.prefix(upTo: secondWhitespaceIndex))
+            print("Substring:", secondValue)
+        }
+        
+        let convertedFirst = Int(firstValue) ?? 1
+        let convertedSecond = Int(secondValue) ?? 1
+        let calculatedArea = convertedFirst * convertedSecond
+        
+        
+        let firstAndSecondValueAreValid = firstValue != "X" && secondValue != "X"
+        let calculatedAreaWithMeasurementUnit = firstAndSecondValueAreValid ? String(calculatedArea) + firstUnit : "? x ?"
+        return calculatedAreaWithMeasurementUnit
+    }
+    
+    
+    
 }
 
 #Preview {
