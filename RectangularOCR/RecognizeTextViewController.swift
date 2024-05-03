@@ -231,8 +231,16 @@ class RecognizeTextViewController: UIViewController {
             print("Substring:", secondValue)
         }
         
-        let convertedFirst = Int(firstValue) ?? 1
-        let convertedSecond = Int(secondValue) ?? 1
+        if firstValue.contains(",") {
+            firstValue = firstValue.replacingOccurrences(of: ",", with: ".")
+        }
+        
+        if secondValue.contains(",") {
+            secondValue = secondValue.replacingOccurrences(of: ",", with: ".")
+        }
+        
+        let convertedFirst = Float(firstValue) ?? 1.0
+        let convertedSecond = Float(secondValue) ?? 1.0
         let calculatedArea = convertedFirst * convertedSecond
         
         let firstAndSecondValueAreValid = firstValue != "X" && secondValue != "X"
